@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            transition: background-color 0.3s ease;
         }
 
         .book-container {
@@ -61,11 +62,16 @@
             right: 0;
             cursor: pointer;
         }
+
+        /* Clase para el modo pantalla completa */
+        .fullscreen {
+            background-color: black;
+        }
     </style>
 </head>
 <body>
 
-<div class="book-container">
+<div class="book-container" id="bookContainer">
     <div class="page active" id="page1">
         <img src="1uno.png" alt="Página 1">
     </div>
@@ -75,7 +81,7 @@
     <div class="page" id="page3">
         <img src="Escena3.png" alt="Página 3">
     </div>
-    
+
     <!-- Áreas clicables para pantalla completa -->
     <div class="clickable-area left"></div>
     <div class="clickable-area right"></div>
@@ -115,6 +121,23 @@
     // Event listeners para las áreas clicables
     document.querySelector('.clickable-area.left').addEventListener('click', prevPage);
     document.querySelector('.clickable-area.right').addEventListener('click', nextPage);
+
+    // Función para alternar pantalla completa
+    function toggleFullscreen() {
+        const elem = document.documentElement;
+        if (!document.fullscreenElement) {
+            elem.requestFullscreen().then(() => {
+                document.body.classList.add('fullscreen');
+            }).catch(err => console.error(`Error al activar pantalla completa: ${err}`));
+        } else {
+            document.exitFullscreen().then(() => {
+                document.body.classList.remove('fullscreen');
+            }).catch(err => console.error(`Error al salir de pantalla completa: ${err}`));
+        }
+    }
+
+    // Doble clic para alternar pantalla completa
+    document.getElementById('bookContainer').addEventListener('dblclick', toggleFullscreen);
 </script>
 
 </body>
