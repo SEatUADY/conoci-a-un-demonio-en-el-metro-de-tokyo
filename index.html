@@ -7,18 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: black; /* Fondo negro en pantalla completa */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            transition: background-color 0.3s ease;
+            overflow: hidden;
+            color: white;
         }
 
         .book-container {
-            width: 600px;
-            height: 400px;
+            width: 80vw;
+            height: 80vh;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             overflow: hidden;
@@ -62,27 +63,22 @@
             right: 0;
             cursor: pointer;
         }
-
-        /* Clase para el modo pantalla completa */
-        .fullscreen {
-            background-color: black;
-        }
     </style>
 </head>
 <body>
 
 <div class="book-container" id="bookContainer">
     <div class="page active" id="page1">
-        <img src="1uno.png" alt="Página 1">
+        <img src="1uno.PNG" alt="Página 1">
     </div>
     <div class="page" id="page2">
-        <img src="Escena2.png" alt="Página 2">
+        <img src="Escena2.PNG" alt="Página 2">
     </div>
     <div class="page" id="page3">
-        <img src="Escena3.png" alt="Página 3">
+        <img src="Escena3.PNG" alt="Página 3">
     </div>
 
-    <!-- Áreas clicables para pantalla completa -->
+    <!-- Áreas clicables para cambiar de página -->
     <div class="clickable-area left"></div>
     <div class="clickable-area right"></div>
 </div>
@@ -109,7 +105,7 @@
         }
     }
 
-    // Event listener para las flechas del teclado
+    // Navegación con las flechas del teclado
     document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowRight') {
             nextPage();
@@ -118,26 +114,18 @@
         }
     });
 
-    // Event listeners para las áreas clicables
+    // Navegación con clic en áreas
     document.querySelector('.clickable-area.left').addEventListener('click', prevPage);
     document.querySelector('.clickable-area.right').addEventListener('click', nextPage);
 
-    // Función para alternar pantalla completa
-    function toggleFullscreen() {
-        const elem = document.documentElement;
+    // Entrar en pantalla completa al cargar la página
+    document.addEventListener("DOMContentLoaded", () => {
         if (!document.fullscreenElement) {
-            elem.requestFullscreen().then(() => {
-                document.body.classList.add('fullscreen');
-            }).catch(err => console.error(`Error al activar pantalla completa: ${err}`));
-        } else {
-            document.exitFullscreen().then(() => {
-                document.body.classList.remove('fullscreen');
-            }).catch(err => console.error(`Error al salir de pantalla completa: ${err}`));
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error al activar pantalla completa: ${err}`);
+            });
         }
-    }
-
-    // Doble clic para alternar pantalla completa
-    document.getElementById('bookContainer').addEventListener('dblclick', toggleFullscreen);
+    });
 </script>
 
 </body>
