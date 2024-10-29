@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: black; /* Fondo negro en pantalla completa */
+            background-color: black; /* Fondo negro para pantalla completa */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,7 +19,8 @@
 
         .book-container {
             width: 80vw;
-            height: 80vh;
+            height: 60vw; /* Ajustado para una proporción de 4:3 */
+            max-height: 80vh;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             overflow: hidden;
@@ -43,8 +44,10 @@
         }
 
         .page img {
-            width: 80%;
+            width: 100%;
             height: auto;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .clickable-area {
@@ -69,13 +72,13 @@
 
 <div class="book-container" id="bookContainer">
     <div class="page active" id="page1">
-        <img src="1uno.PNG" alt="Página 1">
+        <img src="1uno.png" alt="Página 1">
     </div>
     <div class="page" id="page2">
-        <img src="Escena2.PNG" alt="Página 2">
+        <img src="Escena2.png" alt="Página 2">
     </div>
     <div class="page" id="page3">
-        <img src="Escena3.PNG" alt="Página 3">
+        <img src="Escena3.png" alt="Página 3">
     </div>
 
     <!-- Áreas clicables para cambiar de página -->
